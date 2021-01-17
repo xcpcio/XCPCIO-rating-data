@@ -43,4 +43,4 @@ jobs:
         with:
           workflow: Update And Commit
           repo: XCPCIO/XCPCIO-rating
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
