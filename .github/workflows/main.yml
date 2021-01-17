@@ -37,3 +37,11 @@ jobs:
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: site # The folder the action should deploy.
           CLEAN: false # Automatically remove deleted files from the deploy branch
+
+      - name: Invoke workflow in another repo with inputs
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Update Submodule
+          repo: XCPCIO/XCPCIO-rating
+          token: ${{ secrets.GITHUB_TOKEN }}
+          inputs: '{ "message": "rating-data" }'
