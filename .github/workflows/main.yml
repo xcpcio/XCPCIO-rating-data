@@ -41,7 +41,7 @@ jobs:
       - name: Invoke workflow in another repo with inputs
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: Update Submodule
+          workflow: Update And Commit
           repo: XCPCIO/XCPCIO-rating
           token: ${{ secrets.GITHUB_TOKEN }}
           inputs: '{ "message": "rating-data" }'
