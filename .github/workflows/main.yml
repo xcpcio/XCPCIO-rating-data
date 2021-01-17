@@ -44,4 +44,3 @@ jobs:
           workflow: Update And Commit
           repo: XCPCIO/XCPCIO-rating
           token: ${{ secrets.GITHUB_TOKEN }}
-          inputs: '{ "message": "rating-data" }'
