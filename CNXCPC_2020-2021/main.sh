@@ -19,6 +19,6 @@ i_list=(
 for i in ${i_list[@]}
 do
     echo $SHELL_FOLDER/raw/$i
-    python3 $SHELL_FOLDER/../rating.py -i=$SHELL_FOLDER/raw/$i -o=$SHELL_FOLDER/rating.json
+    python3 $SHELL_FOLDER/../rating.py -i=$SHELL_FOLDER/raw/$i -o=$SHELL_FOLDER/rating.json -b=1900
 done
 

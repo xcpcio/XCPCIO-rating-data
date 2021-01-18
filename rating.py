@@ -108,7 +108,7 @@ def json_input(path):
         return json.load(f)
 
 def calc_rating(history):
-    base = 1500
+    global base
     rating = base
     maxRating = base
     for contest in history:
@@ -119,7 +119,11 @@ def calc_rating(history):
 parser = argparse.ArgumentParser(description='Calculate Rating.')
 parser.add_argument('-i', '--input', type=str, help='path of input file')
 parser.add_argument('-o', '--output', type=str, help='path of output file')
+parser.add_argument('-b', '--base', type=int, help="base rating of unrated user")
 args = parser.parse_args()
+
+# base rating of unrated user
+base = 1500
 
 ensure_dir('log')
 logger = logging.getLogger(__name__)
@@ -131,8 +135,11 @@ handler.setFormatter(formatter)
 logger.addHandler(console)
 logger.addHandler(handler)
 
+if args.base: base = args.base
 logger.info(f"input: {args.input}")
 logger.info(f"output: {args.output}")
+logger.info(f"base rating: {base}")
+
 
 if not args.input or not args.output:
     logger.error("please input args -i or -o")
