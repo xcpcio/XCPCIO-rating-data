@@ -97,7 +97,7 @@ def ensure_no_dir(s):
         rmtree(s)
 
 def json_output(data):
-    return json.dumps(data, sort_keys=False, indent=4, separators=(',', ':'), ensure_ascii=False)
+    return json.dumps(data, sort_keys=False, separators=(',', ':'), ensure_ascii=False)
 
 def output(filename, data):
     with open(filename, 'w') as f:
