@@ -26,8 +26,7 @@ done
 echo [] > list.json
 for dir in ${all_dir_list[@]}
 do
-    dir=data/$dir
-    python3 get_info.py -i=$SHELL_FOLDER/$dir/config.json -o=$SHELL_FOLDER/list.json -d=$dir
+    python3 get_info.py -i=$SHELL_FOLDER/data/$dir/config.json -o=$SHELL_FOLDER/list.json -d=$dir
 done
 
 cp list.json site/list.json
