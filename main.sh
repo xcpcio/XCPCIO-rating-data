@@ -30,11 +30,7 @@ done
 echo [] > list.json
 for dir in ${all_dir_list[@]}
 do
-<<<<<<< HEAD
     python3 $SHELL_FOLDER/get_info.py -i=$SHELL_FOLDER/data/$dir/config.json -o=$SHELL_FOLDER/list.json -d=$dir
-=======
-    python3 get_info.py -i=$SHELL_FOLDER/data/$dir/config.json -o=$SHELL_FOLDER/list.json -d=$dir
->>>>>>> 1c822e77cf1170d64319b1b0be90f7a64ef1342c
 done
 
 cp $SHELL_FOLDER/list.json $SHELL_FOLDER/site/list.json

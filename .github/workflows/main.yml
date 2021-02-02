@@ -34,7 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: site # The folder the action should deploy.
-          CLEAN: false # Automatically remove deleted files from the deploy branch
+          CLEAN: true # Automatically remove deleted files from the deploy branch
 
       - name: Invoke workflow in XCPCIO-rating with inputs
         uses: benc-uk/workflow-dispatch@v1
