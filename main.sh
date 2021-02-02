@@ -12,22 +12,25 @@ dir_list=(
 
 SHELL_FOLDER=$(cd "$(dirname "$0")";pwd)
 
-mkdir site
+[ -d $SHELL_FOLDER/site ] && rm -rf $SHELL_FOLDER/site
+
+if [ ! -d $SHELL_FOLDER/site ]; then
+  mkdir $SHELL_FOLDER/site
+fi
 
 for dir in ${dir_list[@]}
 do
-    bash ./data/$dir/main.sh
-    mkdir site/$dir
-    cp ./data/$dir/rating.json site/$dir/rating.json
-    cp ./data/$dir/config.json site/$dir/config.json
+    bash $SHELL_FOLDER/data/$dir/main.sh
+    mkdir $SHELL_FOLDER/site/$dir
+    cp $SHELL_FOLDER/data/$dir/rating.json $SHELL_FOLDER/site/$dir/rating.json
+    cp $SHELL_FOLDER/data/$dir/config.json $SHELL_FOLDERsite/$dir/config.json
 done
 
 [ -f list.json ] && rm -f list.json
 echo [] > list.json
 for dir in ${all_dir_list[@]}
 do
-    dir=data/$dir
-    python3 get_info.py -i=$SHELL_FOLDER/$dir/config.json -o=$SHELL_FOLDER/list.json -d=$dir
+    python3 $SHELL_FOLDER/get_info.py -i=$SHELL_FOLDER/data/$dir/config.json -o=$SHELL_FOLDER/list.json -d=$dir
 done
 
-cp list.json site/list.json
+cp $SHELL_FOLDER/list.json $SHELL_FOLDER/site/list.json

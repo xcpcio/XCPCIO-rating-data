@@ -112,8 +112,8 @@ def calc_rating(history):
     rating = base
     maxRating = base
     for contest in history:
-        rating = contest['rating']
-        maxRating = max(maxRating, contest['rating'])
+        rating = contest['newRating']
+        maxRating = max(maxRating, contest['newRating'])
     return rating, maxRating
 
 parser = argparse.ArgumentParser(description='Calculate Rating.')
@@ -140,7 +140,6 @@ logger.info(f"input: {args.input}")
 logger.info(f"output: {args.output}")
 logger.info(f"base rating: {base}")
 
-
 if not args.input or not args.output:
     logger.error("please input args -i or -o")
     exit()
@@ -159,13 +158,15 @@ calculator = RatingCalculator()
 last_idx = 0
 last_rank = 1
 contestName = contest['contestName']
+time = contest['endTime']
+link = contest['link']
 logger.info(f"Contest Name: {contestName}")
 
 for team in contest['teams']:
     handle = ', '.join(team['members'])
     if handle == '':
         continue
-    rank = team['place']['all']
+    rank = team['rank']
     _team = {}
     _team['handle'] = handle
     _team['organization'] = team['organization']
@@ -186,8 +187,11 @@ for team in contest['teams']:
     data[handle]['history'].append({
         'contestId': contestName,
         'contestName': contestName,
+        'time': time,
         'teamName': team['name'],
-        'rank': rank
+        'rank': rank,
+        'oldRating': data[handle]['rating'],
+        'link': link
     })
 
     calculator.user_list.append(
@@ -210,7 +214,7 @@ for i in range(len(calculator.user_list)):
         if data[handle]['history'][i]['contestId'] == contestName:
            ix = i
            break
-    data[handle]['history'][ix]['rating'] = rating
+    data[handle]['history'][ix]['newRating'] = rating
     data[handle]['rating'], data[handle]['maxRating'] = calc_rating(data[handle]['history'])
 
 output(dist, data)

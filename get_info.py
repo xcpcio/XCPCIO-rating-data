@@ -7,7 +7,6 @@ from shutil import copyfile, rmtree, make_archive
 from time import strftime, localtime, time
 import argparse
 
-
 def ensure_dir(s):
     if not os.path.exists(s):
         os.makedirs(s)
