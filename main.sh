@@ -23,7 +23,7 @@ do
     bash $SHELL_FOLDER/data/$dir/main.sh
     mkdir $SHELL_FOLDER/site/$dir
     cp $SHELL_FOLDER/data/$dir/rating.json $SHELL_FOLDER/site/$dir/rating.json
-    cp $SHELL_FOLDER/data/$dir/config.json $SHELL_FOLDERsite/$dir/config.json
+    cp $SHELL_FOLDER/data/$dir/config.json $SHELL_FOLDER/site/$dir/config.json
 done
 
 [ -f list.json ] && rm -f list.json
