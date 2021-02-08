@@ -171,6 +171,9 @@ for team in contest['teams']:
     _team['handle'] = handle
     _team['organization'] = team['organization']
     _team['members'] = team['members']
+    info = ''
+    if 'info' in team.keys():
+        info = team['info']
     if handle not in data.keys():
         data[handle] = _team
         data[handle]['history'] = []
@@ -191,7 +194,8 @@ for team in contest['teams']:
         'teamName': team['name'],
         'rank': rank,
         'oldRating': data[handle]['rating'],
-        'link': link
+        'link': link,
+        'info': info,
     })
 
     calculator.user_list.append(

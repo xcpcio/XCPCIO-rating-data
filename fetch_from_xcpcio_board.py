@@ -58,6 +58,10 @@ rating_info['link'] = 'https://board.xcpcio.com/' + args.path
 rating_info['teams'] = []
 
 penalty = config['penalty']
+group = []
+
+if 'group' in config.keys():
+    group = config['group']
 
 for k in team.keys():
     team[k]['problem'] = [0] * len(config['problem_id'])
@@ -94,13 +98,18 @@ _team.sort(key=lambda e:(-e['solved'], e['time'], e['name']))
 
 for i in range(len(_team)):
     __team = _team[i]
+    info = []
+    for g in group.keys():
+        if g in __team.keys():
+            info.append(group[g])
     item = {
         'members': [],
         'organization': '',
         'name': '',
         'rank': i + 1,
         'solved': __team['solved'],
-        'time': __team['time']
+        'time': __team['time'],
+        'info': ','.join(info),
     }
     if 'members' in __team.keys():
         item['members'] = __team['members']

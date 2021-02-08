@@ -2,6 +2,8 @@
 
 set -x
 
+pip3 install -U -r requirements.txt
+
 all_dir_list=(
     'CNXCPC_2020-2021'
 )
