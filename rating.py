@@ -194,6 +194,7 @@ for team in contest['teams']:
         'oldRating': data[handle]['rating'],
         'link': link,
         'info': info,
+        'teamName': team['teamName'],
     })
 
     calculator.user_list.append(

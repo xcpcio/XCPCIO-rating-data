@@ -98,9 +98,11 @@ _team.sort(key=lambda e:(-e['solved'], e['time'], e['name']))
 
 for i in range(len(_team)):
     __team = _team[i]
+    name = ''
     info = []
     if 'name' in __team.keys():
         info.append(__team['name'].strip())
+        name = __team['name'].strip()
     for g in group.keys():
         if g in __team.keys():
             info.append(group[g])
@@ -116,6 +118,7 @@ for i in range(len(_team)):
         'solved': __team['solved'],
         'time': __team['time'],
         'info': ','.join(info),
+        'teamName': name
     }
     if 'organization' in __team.keys():
         item['organization'] = __team['organization'].strip()
