@@ -163,14 +163,13 @@ link = contest['link']
 logger.info(f"Contest Name: {contestName}")
 
 for team in contest['teams']:
-    handle = ', '.join(team['members'])
+    handle = team['handle']
     if handle == '':
         continue
     rank = team['rank']
     _team = {}
     _team['handle'] = handle
     _team['organization'] = team['organization']
-    _team['members'] = team['members']
     info = ''
     if 'info' in team.keys():
         info = team['info']
@@ -191,7 +190,6 @@ for team in contest['teams']:
         'contestId': contestName,
         'contestName': contestName,
         'time': time,
-        'teamName': team['name'],
         'rank': rank,
         'oldRating': data[handle]['rating'],
         'link': link,

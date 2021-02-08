@@ -99,26 +99,26 @@ _team.sort(key=lambda e:(-e['solved'], e['time'], e['name']))
 for i in range(len(_team)):
     __team = _team[i]
     info = []
+    if 'name' in __team.keys():
+        info.append(__team['name'].strip())
     for g in group.keys():
         if g in __team.keys():
             info.append(group[g])
+    members = []
+    if 'members' in __team.keys():
+        members = __team['members']
+        for j in range(len(members)):
+            members[j] = members[j].strip()
     item = {
-        'members': [],
+        'handle': '，'.join(members),
         'organization': '',
-        'name': '',
         'rank': i + 1,
         'solved': __team['solved'],
         'time': __team['time'],
         'info': ','.join(info),
     }
-    if 'members' in __team.keys():
-        item['members'] = __team['members']
-        for j in range(len(item['members'])):
-            item['members'][j] = item['members'][j].strip()
     if 'organization' in __team.keys():
         item['organization'] = __team['organization'].strip()
-    if 'name' in __team.keys():
-        item['name'] = __team['name'].strip()
     rating_info['teams'].append(item)
     
 output(args.output, rating_info)
