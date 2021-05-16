@@ -109,8 +109,12 @@ for i in range(len(_team)):
     members = []
     if 'members' in __team.keys():
         members = __team['members']
+        if len(members) == 0:
+            continue
         for j in range(len(members)):
             members[j] = members[j].strip()
+    else:
+        continue
     item = {
         'handle': ', '.join(members),
         'organization': '',
