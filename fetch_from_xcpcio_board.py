@@ -107,12 +107,11 @@ for i in range(len(_team)):
         if g in __team.keys():
             info.append(group[g])
     members = []
-    if 'members' in __team.keys():
-        members = __team['members']
-        if len(members) == 0:
-            continue
+    if 'members' in __team.keys() and len(__team['members']) > 0:
+        members = list(__team['members'])
         for j in range(len(members)):
             members[j] = members[j].strip()
+        members.sort()
     else:
         continue
     item = {
