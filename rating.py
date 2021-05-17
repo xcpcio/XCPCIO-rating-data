@@ -128,7 +128,7 @@ base = 1500
 ensure_dir('log')
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-handler = logging.FileHandler('log/{}.log'.format(strftime('%Y-%m-%d %H:%M:%S', localtime(time()))))
+handler = logging.FileHandler('log/{}.log'.format(strftime('%Y-%m-%dT%H:%M:%S', localtime(time()))))
 console = logging.StreamHandler()
 formatter = logging.Formatter('%(asctime)s - %(levelname)s[line:%(lineno)d] - %(levelname)s: %(message)s')
 handler.setFormatter(formatter)
