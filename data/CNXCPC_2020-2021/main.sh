@@ -15,6 +15,7 @@ i_list=(
     'icpc/2020/nanjing'
     'icpc/2020/jinan'
     'icpc/2020/kunming'
+    'ccpc/2020/final'
 )
 
 [ -d "$SHELL_FOLDER/raw" ] && rm -rf "$SHELL_FOLDER/raw"
