@@ -37,5 +37,5 @@ for i in "${i_list[@]}"
 do
     echo "$SHELL_FOLDER/raw/${out}"
     out=$( echo "${i}" | sed 's/\//-/g' ) 
-    python3 "$SHELL_FOLDER/../../rating.py" "-i=$SHELL_FOLDER/raw/${out}.json" "-o=$SHELL_FOLDER/rating.json" -b=1900
+    python3 "$SHELL_FOLDER/../../rating.py" "-i=$SHELL_FOLDER/raw/${out}.json" "-o=$SHELL_FOLDER/rating.json" -b=2300
 done
