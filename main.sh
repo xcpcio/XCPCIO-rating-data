@@ -5,11 +5,11 @@ set -x
 pip3 install -U -r requirements.txt
 
 all_dir_list=(
-    'CNXCPC_2020-2021'
+    'cnxcpc-2020-2021'
 )
 
 dir_list=(
-    'CNXCPC_2020-2021'
+    'cnxcpc-2020-2021'
 )
 
 SHELL_FOLDER=$(dirname "$(realpath "$0")")
