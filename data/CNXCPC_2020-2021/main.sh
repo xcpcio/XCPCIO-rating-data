@@ -22,20 +22,18 @@ i_list=(
 [ -d "$SHELL_FOLDER/raw" ] && rm -rf "$SHELL_FOLDER/raw"
 
 if [ ! -d "$SHELL_FOLDER/raw" ]; then
-  mkdir "$SHELL_FOLDER/raw"
+    mkdir "$SHELL_FOLDER/raw"
 fi
 
 [ -f rating.json ] && rm -f rating.json
 
-for i in "${i_list[@]}"
-do
-    out=$( echo "${i}" | sed 's/\//-/g' ) 
+for i in "${i_list[@]}"; do
+    out=$(echo "${i}" | sed 's/\//-/g')
     python3 "$SHELL_FOLDER/../../fetch_from_xcpcio_board.py" "-p=${i}" "-o=$SHELL_FOLDER/raw/${out}.json"
 done
 
-for i in "${i_list[@]}"
-do
+for i in "${i_list[@]}"; do
     echo "$SHELL_FOLDER/raw/${out}"
-    out=$( echo "${i}" | sed 's/\//-/g' ) 
+    out=$(echo "${i}" | sed 's/\//-/g')
     python3 "$SHELL_FOLDER/../../rating.py" "-i=$SHELL_FOLDER/raw/${out}.json" "-o=$SHELL_FOLDER/rating.json" -b=2300
 done

@@ -7,6 +7,7 @@ from shutil import copyfile, rmtree, make_archive
 from time import strftime, localtime, time
 import argparse
 
+
 class User():
     def __init__(self, rank, old_rating, handle='', official_new_rating=0):
         self.rank = float(rank)
@@ -15,6 +16,7 @@ class User():
         self.handle = str(handle)
         # official_new_rating: used for validating result
         self.official_new_rating = int(official_new_rating)
+
 
 class RatingCalculator():
     def __init__(self):
@@ -88,24 +90,30 @@ class RatingCalculator():
                                 key=lambda x: x.rank,
                                 reverse=False)
 
+
 def ensure_dir(s):
     if not os.path.exists(s):
         os.makedirs(s)
+
 
 def ensure_no_dir(s):
     if os.path.exists(s):
         rmtree(s)
 
+
 def json_output(data):
     return json.dumps(data, sort_keys=False, separators=(',', ':'), ensure_ascii=False)
+
 
 def output(filename, data):
     with open(filename, 'w') as f:
         f.write(json_output(data))
 
+
 def json_input(path):
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)
+
 
 def calc_rating(history):
     global base
@@ -116,10 +124,12 @@ def calc_rating(history):
         maxRating = max(maxRating, contest['newRating'])
     return rating, maxRating
 
+
 parser = argparse.ArgumentParser(description='Calculate Rating.')
 parser.add_argument('-i', '--input', type=str, help='path of input file')
 parser.add_argument('-o', '--output', type=str, help='path of output file')
-parser.add_argument('-b', '--base', type=int, help="base rating of unrated user")
+parser.add_argument('-b', '--base', type=int,
+                    help="base rating of unrated user")
 args = parser.parse_args()
 
 # base rating of unrated user
@@ -128,14 +138,17 @@ base = 1500
 ensure_dir('log')
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-handler = logging.FileHandler('log/{}.log'.format(strftime('%Y-%m-%dT%H:%M:%S', localtime(time()))))
+handler = logging.FileHandler(
+    'log/{}.log'.format(strftime('%Y-%m-%dT%H:%M:%S', localtime(time()))))
 console = logging.StreamHandler()
-formatter = logging.Formatter('%(asctime)s - %(levelname)s[line:%(lineno)d] - %(levelname)s: %(message)s')
+formatter = logging.Formatter(
+    '%(asctime)s - %(levelname)s[line:%(lineno)d] - %(levelname)s: %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(console)
 logger.addHandler(handler)
 
-if args.base: base = args.base
+if args.base:
+    base = args.base
 logger.info(f"input: {args.input}")
 logger.info(f"output: {args.output}")
 logger.info(f"base rating: {base}")
@@ -179,12 +192,13 @@ for team in contest['teams']:
     ix = -1
     for i in range(len(data[handle]['history'])):
         if data[handle]['history'][i]['contestId'] == contestName:
-           ix = i
-           break 
+            ix = i
+            break
     if ix != -1:
         del data[handle]['history'][ix]
-    
-    data[handle]['rating'], data[handle]['maxRating'] = calc_rating(data[handle]['history'])
+
+    data[handle]['rating'], data[handle]['maxRating'] = calc_rating(
+        data[handle]['history'])
 
     data[handle]['history'].append({
         'contestId': contestName,
@@ -199,10 +213,10 @@ for team in contest['teams']:
 
     calculator.user_list.append(
         User(
-            rank = rank,
-            old_rating = data[handle]['rating'],
-            handle = handle,
-    ))
+            rank=rank,
+            old_rating=data[handle]['rating'],
+            handle=handle,
+        ))
 
 calculator.calculate()
 
@@ -215,9 +229,10 @@ for i in range(len(calculator.user_list)):
     ix = -1
     for i in range(len(data[handle]['history'])):
         if data[handle]['history'][i]['contestId'] == contestName:
-           ix = i
-           break
+            ix = i
+            break
     data[handle]['history'][ix]['newRating'] = rating
-    data[handle]['rating'], data[handle]['maxRating'] = calc_rating(data[handle]['history'])
+    data[handle]['rating'], data[handle]['maxRating'] = calc_rating(
+        data[handle]['history'])
 
 output(dist, data)
